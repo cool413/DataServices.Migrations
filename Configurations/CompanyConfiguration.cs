@@ -18,28 +18,6 @@ namespace DataServices.Migrations.Configurations
 
             builder.Property(p => p.Code)
                 .HasColumnType("varchar(4)").IsRequired();
-
-            // builder.HasData
-            // (
-            //     new Company
-            //     {
-            //         Id = 1,
-            //         Name = "東洋",
-            //         Code = "0340"
-            //     },
-            //     new Company
-            //     {
-            //         Id = 2,
-            //         Name = "訊聯",
-            //         Code = "0322"
-            //     },
-            //     new Company
-            //     {
-            //         Id = 3,
-            //         Name = "雲門",
-            //         Code = "0217"
-            //     }
-            // );
         }
     }
 }

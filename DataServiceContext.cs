@@ -2,7 +2,8 @@
 using System.Linq;
 using DataServices.Migrations.Configurations;
 using DataServices.Migrations.EntityModels;
-using DataServices.Migrations.Interfaces;
+ using DataServices.Migrations.Extensions;
+ using DataServices.Migrations.Interfaces;
 using Microsoft.EntityFrameworkCore;
  using Microsoft.Extensions.Configuration;
 
@@ -14,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<Confirmation> Confirmations { get; set; }
         public DbSet<CRMProgram> CRMProgram { get; set; }
         public DbSet<Employee> Employee { get; set; }
-        public DbSet<Task> Task { get; set; }
+        public DbSet<Job> Task { get; set; }
 
         // public DataServiceContext(DbContextOptions options)
         //     : base(options)
@@ -41,7 +42,8 @@ using Microsoft.EntityFrameworkCore;
             modelBuilder.ApplyConfiguration(new ConfirmationConfiguration());
             modelBuilder.ApplyConfiguration(new CRMProgramConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new TaskConfiguration());
+            modelBuilder.ApplyConfiguration(new JobConfiguration());
+            modelBuilder.Seed();
         }
 
         public override int SaveChanges()

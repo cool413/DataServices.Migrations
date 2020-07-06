@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataServices.Migrations.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,7 +96,7 @@ namespace DataServices.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Job",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -115,26 +115,91 @@ namespace DataServices.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.Id);
+                    table.PrimaryKey("PK_Job", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Task_Confirmation_ConfirmationCode",
+                        name: "FK_Job_Confirmation_ConfirmationCode",
                         column: x => x.ConfirmationCode,
                         principalTable: "Confirmation",
                         principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Task_CRMProgram_CRMProgramCode_ConfirmationCode",
+                        name: "FK_Job_CRMProgram_CRMProgramCode_ConfirmationCode",
                         columns: x => new { x.CRMProgramCode, x.ConfirmationCode },
                         principalTable: "CRMProgram",
                         principalColumns: new[] { "Code", "ConfirmationCode" },
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Task_Employee_EmployeeId",
+                        name: "FK_Job_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Company",
+                columns: new[] { "Id", "Code", "CreatedDate", "ModifiedDate", "Name" },
+                values: new object[,]
+                {
+                    { 1, "0340", new DateTime(2020, 7, 7, 1, 54, 38, 262, DateTimeKind.Local).AddTicks(9248), new DateTime(2020, 7, 7, 1, 54, 38, 264, DateTimeKind.Local).AddTicks(458), "東洋" },
+                    { 2, "0322", new DateTime(2020, 7, 7, 1, 54, 38, 264, DateTimeKind.Local).AddTicks(1145), new DateTime(2020, 7, 7, 1, 54, 38, 264, DateTimeKind.Local).AddTicks(1164), "訊聯" },
+                    { 3, "0217", new DateTime(2020, 7, 7, 1, 54, 38, 264, DateTimeKind.Local).AddTicks(1173), new DateTime(2020, 7, 7, 1, 54, 38, 264, DateTimeKind.Local).AddTicks(1175), "雲門" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employee",
+                columns: new[] { "Id", "CreatedDate", "ModifiedDate", "Name", "Type" },
+                values: new object[,]
+                {
+                    { "09846", new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8700), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8708), "Derek", "PR" },
+                    { "07056", new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8759), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8760), "Young", "PR" },
+                    { "05438", new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8763), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(8764), "Carter", "SD" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Confirmation",
+                columns: new[] { "Code", "CompanyId", "CreatedDate", "ModifiedDate", "SystemVersion" },
+                values: new object[] { "0000128773_CRM_0001", 1, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3750), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3761), "91" });
+
+            migrationBuilder.InsertData(
+                table: "Confirmation",
+                columns: new[] { "Code", "CompanyId", "CreatedDate", "ModifiedDate", "SystemVersion" },
+                values: new object[] { "0000670228_CRM_0002", 2, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3861), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3866), "91" });
+
+            migrationBuilder.InsertData(
+                table: "Confirmation",
+                columns: new[] { "Code", "CompanyId", "CreatedDate", "ModifiedDate", "SystemVersion" },
+                values: new object[] { "0000129312_CRM_0003", 3, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3868), new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(3869), "91" });
+
+            migrationBuilder.InsertData(
+                table: "CRMProgram",
+                columns: new[] { "Code", "ConfirmationCode", "CompanyId", "CreatedDate", "EmployeeId", "Hours", "ModifiedDate", "Name" },
+                values: new object[] { "SALMI21", "0000128773_CRM_0001", 1, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(6892), "09846", 10m, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(6903), "工作紀錄" });
+
+            migrationBuilder.InsertData(
+                table: "CRMProgram",
+                columns: new[] { "Code", "ConfirmationCode", "CompanyId", "CreatedDate", "EmployeeId", "Hours", "ModifiedDate", "Name" },
+                values: new object[] { "SALMI30", "0000670228_CRM_0002", 2, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(7041), "05438", 20m, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(7044), "報價單" });
+
+            migrationBuilder.InsertData(
+                table: "CRMProgram",
+                columns: new[] { "Code", "ConfirmationCode", "CompanyId", "CreatedDate", "EmployeeId", "Hours", "ModifiedDate", "Name" },
+                values: new object[] { "REPMI13", "0000129312_CRM_0003", 3, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(7049), "07056", 30m, new DateTime(2020, 7, 7, 1, 54, 38, 265, DateTimeKind.Local).AddTicks(7051), "維修單" });
+
+            migrationBuilder.InsertData(
+                table: "Job",
+                columns: new[] { "Id", "CRMProgramCode", "ConfirmationCode", "CreatedDate", "EmployeeId", "EndDate", "Hours", "ModifiedDate", "Priority", "StarDate", "Status", "Tag" },
+                values: new object[] { 1, "SALMI21", "0000128773_CRM_0001", new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2008), "09846", "20200630", 10m, new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2016), "2", "20200621", "0", "" });
+
+            migrationBuilder.InsertData(
+                table: "Job",
+                columns: new[] { "Id", "CRMProgramCode", "ConfirmationCode", "CreatedDate", "EmployeeId", "EndDate", "Hours", "ModifiedDate", "Priority", "StarDate", "Status", "Tag" },
+                values: new object[] { 2, "SALMI30", "0000670228_CRM_0002", new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2096), "05438", "20200830", 20m, new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2097), "2", "20200721", "0", "" });
+
+            migrationBuilder.InsertData(
+                table: "Job",
+                columns: new[] { "Id", "CRMProgramCode", "ConfirmationCode", "CreatedDate", "EmployeeId", "EndDate", "Hours", "ModifiedDate", "Priority", "StarDate", "Status", "Tag" },
+                values: new object[] { 3, "REPMI13", "0000129312_CRM_0003", new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2100), "07056", "20201030", 30m, new DateTime(2020, 7, 7, 1, 54, 38, 266, DateTimeKind.Local).AddTicks(2101), "2", "20200921", "0", "" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Confirmation_CompanyId",
@@ -157,25 +222,25 @@ namespace DataServices.Migrations.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_ConfirmationCode",
-                table: "Task",
+                name: "IX_Job_ConfirmationCode",
+                table: "Job",
                 column: "ConfirmationCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_CRMProgramCode_ConfirmationCode",
-                table: "Task",
+                name: "IX_Job_CRMProgramCode_ConfirmationCode",
+                table: "Job",
                 columns: new[] { "CRMProgramCode", "ConfirmationCode" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_EmployeeId",
-                table: "Task",
+                name: "IX_Job_EmployeeId",
+                table: "Job",
                 column: "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Task");
+                name: "Job");
 
             migrationBuilder.DropTable(
                 name: "CRMProgram");

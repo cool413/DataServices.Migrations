@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataServices.Migrations.EntityModels
 {
-    [Table("CRMProgram")]
     public class CRMProgram : TrackableEntry
     {
         public string Code { get; set; }
@@ -23,7 +21,7 @@ namespace DataServices.Migrations.EntityModels
         public virtual Confirmation Confirmation { get; set; }
         public virtual Company Company { get; set; }
         public virtual Employee Employee { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<Job> Jobs { get; set; }
 
         #endregion
     }

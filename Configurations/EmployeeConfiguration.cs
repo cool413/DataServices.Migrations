@@ -22,29 +22,6 @@ namespace DataServices.Migrations.Configurations
             builder.Property(p => p.Type)
                 .HasColumnType("char(2)")
                 .IsRequired();
-
-
-            // builder.HasData
-            // (
-            //     new Employee
-            //     {
-            //         Id = "09846",
-            //         Name = "Derek",
-            //         Type = "PR"
-            //     },
-            //     new Employee
-            //     {
-            //         Id = "07056",
-            //         Name = "Young",
-            //         Type = "PR"
-            //     },
-            //     new Employee
-            //     {
-            //         Id = "05438",
-            //         Name = "Carter",
-            //         Type = "SD"
-            //     }
-            // );
         }
     }
 }

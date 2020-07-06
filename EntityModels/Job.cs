@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DataServices.Migrations.EntityModels
+﻿namespace DataServices.Migrations.EntityModels
 {
-    [Table("Task")]
-    public class Task : TrackableEntry
+    public class Job : TrackableEntry
     {
         public int Id { get; set; }
         public string Tag { get; set; }

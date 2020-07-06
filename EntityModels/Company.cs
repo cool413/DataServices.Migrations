@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataServices.Migrations.EntityModels
 {
-    [Table("Company")]
     public class Company : TrackableEntry
     {
         public int Id { get; set; }
